@@ -3,6 +3,8 @@ const signup = require("../componnents/authentications/user/signup");
 const login= require("../componnents/authentications/user/login");
 const dashboard=require("../componnents/dashboard/user/dashboard");
 const forgetpass=require("../componnents/authentications/user/forgetpass");
+const choice = require("../componnents/home/choicefilling");
+const { author } = require("../componnents/authentications/jwt/authentication");
 
 
 //--user/signup
@@ -25,6 +27,10 @@ router.post("/login/forgetpass/verified",forgetpass.Set_password);
 
 //--user/dashboard
 router.get('/dashboard/:id',dashboard.get);
+
+//--login system
+router.get('/choice', author , choice.get);
+router.get('/choice', author , choice.create);
 
 
 
