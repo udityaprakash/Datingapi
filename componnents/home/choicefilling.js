@@ -8,11 +8,12 @@ const choice = {
     },
     create:async (req,res)=>{
         var data = req.body;
+        console.log(data);
         if(await signup.studentexist(req.email)){
 
             data.forEach(function (item) {
-                console.log(item.instaid);
-                console.log(item.name);
+                console.log("instaid: "+item.instaid);
+                console.log("instaname: "+item.name);
             });
             res.json({
                 success:true,
