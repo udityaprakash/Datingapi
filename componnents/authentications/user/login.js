@@ -18,8 +18,7 @@ post: async (req,res)=>{
             if(match){
               console.log(result[0].verified);
               if(result[0].verified == true){
-                let token = jwt.sign({ id:result._id, email: email}, process.env.SECRET_KEY);
-
+                let token = jwt.sign({ id:result[0]._id, email: email}, process.env.SECRET_KEY);
                 res.status(200).json({
                   status:true,
                   token:token,

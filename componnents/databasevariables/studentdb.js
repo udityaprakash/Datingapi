@@ -58,7 +58,7 @@ const schema= new mongoose.Schema({
         },
         plan:{
           type:Number,
-          default:0
+          default:1
         }
     },
     matchedwith:{
