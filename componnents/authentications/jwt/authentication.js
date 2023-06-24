@@ -13,6 +13,7 @@ const author = (req,res,next)=>{
                 req.email = user.email; 
                 next();
             }catch(err){
+                console.log("error:"+err);
                 res.status(401).json({succes:false, msg:"Invalid Token"});
             }
         }

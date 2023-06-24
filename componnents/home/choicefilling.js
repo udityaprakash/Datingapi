@@ -24,8 +24,6 @@ const choice = {
                 msg:"User Doesn't exist"
             });
         }
-
-
     }
 
 }

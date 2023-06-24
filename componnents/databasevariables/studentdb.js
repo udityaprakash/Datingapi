@@ -31,7 +31,7 @@ const schema= new mongoose.Schema({
     },
     pnumber:{
       type:String,
-      match: /^(\()?\d{3}(\))?(-|\s)?\d{3}(-|\s)\d{4}$/,
+      // match: /^(\()?\d{3}(\))?(-|\s)?\d{3}(-|\s)\d{4}$/,
     },
     gender:{
       type:Boolean,

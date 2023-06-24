@@ -22,6 +22,7 @@ const result={
 post: async (req,res)=>{ 
     console.log(req.body);
     let {fullname , instausername ,password , email, gender, phonenumber}= req.body;
+    // console.log(req.body);
     var hashedpassword;
     if(fullname && instausername && password && email && gender && phonenumber){
         const salt= parseInt(process.env.SALT);
@@ -186,7 +187,7 @@ post: async (req,res)=>{
     const {otp}=req.body;
     const email= req.params['email'];
 
-    if(Emailvalidator.validate(email)){
+    if(Emailvalidator.validate(email) &&  otp){
       var resu = await student.find({email:email});
         if(resu.length!=0){
         if (resu[0].verified == false){
@@ -219,6 +220,11 @@ post: async (req,res)=>{
         }
 
 
+  }else{
+    {
+      res.json({success:false,
+      msg:"OTP required"});
+  }
   }
 }
 };

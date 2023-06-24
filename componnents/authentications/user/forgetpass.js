@@ -11,7 +11,7 @@ var transporter = nodemailer.createTransport({
     port: 465,
     secure: true,
     auth: {
-      user: 'udityap.davegroup@gmail.com',
+      user: 'matchup143143@gmail.com',
       pass: process.env.EMAILPASSWORD
     }
   });
@@ -49,7 +49,7 @@ const result={
             }   
           }
           var mailOptions = {
-                from: 'matchup143143@gmail.com',
+                from: 'Matchup',
                 to: email,
                 subject: 'Reset Password for Matchup',
                 html: `<div style="max-width: 90%; margin: auto; padding-top: 20px">
