@@ -10,7 +10,7 @@ const student = require("../../databasevariables/studentdb");
 var transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'udityap.davegroup@gmail.com',
+    user: 'matchup143143@gmail.com',
     pass: process.env.EMAILPASSWORD
   }
 });
@@ -21,9 +21,9 @@ var transporter = nodemailer.createTransport({
 const result={
 post: async (req,res)=>{ 
     console.log(req.body);
-    let {fname , lname ,password , email}= req.body;
+    let {fullname , instausername ,password , email, gender, phonenumber}= req.body;
     var hashedpassword;
-    if(fname && lname && password && email){
+    if(fullname && instausername && password && email && gender && phonenumber){
         const salt= parseInt(process.env.SALT);
         hashedpassword = await bcrypt.hash(password, salt);
         email=email.toLowerCase();  
@@ -36,10 +36,13 @@ post: async (req,res)=>{
               }else{
 
                 const user= new student({
-                  fname:fname,
-                  lname:lname,
+                  fullname:fullname,
+                  instauname:instausername,
                   password:hashedpassword,
-                  email:email
+                  email:email,
+                  pnumber:phonenumber,
+                  gender:gender,
+                  
                 });
 
                   await user.save().then((user)=>{
@@ -54,7 +57,7 @@ post: async (req,res)=>{
                     res.status(400).json({
                       success:false,
                       error:err,
-                      msg:"User not been recorded"
+                      msg:"User not been recorded as" + err
                     });
 
                   });
@@ -70,6 +73,10 @@ post: async (req,res)=>{
           
         } catch (error) {
           console.log("error:"+error);
+          res.json({
+            success:false,
+            msg:"Something not good"
+          });
       }
   
     }else{
@@ -106,15 +113,15 @@ post: async (req,res)=>{
             const sa = await student.findOneAndUpdate({email:email},{otp:otp});
 
             var mailOptions = {
-                        from: 'udityap.davegroup@gmail.com',
+                        from: 'matchup143143@gmail.com',
                         to: email,
-                        subject: 'Verify Email from DAWAY',
+                        subject: 'Verify user Account',
                         html: `
                     <div
                       class="container"
                       style="max-width: 90%; margin: auto; padding-top: 20px"
                     >
-                      <h2>Welcome to DAWAY.</h2>
+                      <h2>Welcome to MATCHUP.</h2>
                       <h4>Greatings of the day </h4>
                       <p style="margin-bottom: 30px;">Please enter the OTP to get started</p>
                       <h1 style="font-size: 40px; letter-spacing: 2px; text-align:center;">${otp}</h1>
@@ -124,6 +131,10 @@ post: async (req,res)=>{
             transporter.sendMail(mailOptions, function(error, info){
                         if (error) {
                           console.log("not send :"+error);
+                          res.json({
+                            success:false,
+                            msg:"OTP not send to Email"
+                          });
                         } else {
                           console.log('Email sent: ' + info.response);
                           res.json({success:true,
@@ -184,14 +195,14 @@ post: async (req,res)=>{
               console.log(result);
               res.json({
                 success:true,
-                token:resu[0]._id,
+                // token:resu[0]._id,
                 result:result,
                 msg:"user verified successfully"
               });
 
             }else{
               res.json({success:false,
-              msg:"Invalid OTP"});
+              msg:"OTP Incorrect"});
               
             }
 

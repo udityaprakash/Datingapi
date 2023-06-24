@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const path=require("../../../path");
 const student= require("../../databasevariables/studentdb"); 
 const jwt = require("jsonwebtoken");
+const { assign } = require("nodemailer/lib/shared");
 
 
 const result={
@@ -22,15 +23,18 @@ post: async (req,res)=>{
                 res.status(200).json({
                   status:true,
                   token:token,
-                  msg:"User Exist",
-                  redirecturl:"user/dashboard/:_id"
+                  msg:"Sucessfull Login"
                 });
                 // res.redirect("dashboard/"+ result[0]._id);
 
               }else{
                 // res.redirect("signup/verifyotp/" + email );
-                res.json({success:false,msg:"user not verified yet please verify",
-              redirecturl:"user/signup/verifyotp/<email>"});
+                res.json({
+                  success:false,
+                  msg:"user not verified yet please verify",
+                  redirecturl:"user/signup/verifyotp",
+                  params:"email"
+                });
               }
 
             }else{
@@ -45,7 +49,7 @@ post: async (req,res)=>{
           }else{
             res.status(404).json({
               success:false,
-              msg:"Email ID don't exist"
+              msg:"No Account Found"
             });
           }
   

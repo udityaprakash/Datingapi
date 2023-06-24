@@ -2,12 +2,12 @@ const express = require("express");
 const mongoose = require("mongoose");
 
 const schema= new mongoose.Schema({
-    fname : {
+    fullname : {
      type:String,
      min:8,
      required:true
     },
-    lname : {
+    instauname : {
       type:String,
       min:8,
      },
@@ -29,9 +29,47 @@ const schema= new mongoose.Schema({
       },
       required: [true, "Email required"]
     },
+    pnumber:{
+      type:String,
+      match: /^(\()?\d{3}(\))?(-|\s)?\d{3}(-|\s)\d{4}$/,
+    },
+    gender:{
+      type:Boolean,
+      default:null
+    },
     otp:{
       type:Number,
       default:null
+    },
+    options:[
+      {
+        instaid:{
+          type:String
+        },
+        name:{
+          type:String
+        }
+      }   
+   ],
+    subscription:{
+        exist:{
+          type:Boolean,
+          default:false
+        },
+        plan:{
+          type:Number,
+          default:0
+        }
+    },
+    matchedwith:{
+      instaid:{
+        type:String,
+        default:null,
+      },
+      name:{
+        type:String,
+        default:null,
+      }
     },
     verified:{
       type:Boolean,

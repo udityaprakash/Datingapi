@@ -28,9 +28,9 @@ router.post("/login/forgetpass/verified",forgetpass.Set_password);
 //--user/dashboard
 router.get('/dashboard/:id',dashboard.get);
 
-//--login system
+//--choice filling system
 router.get('/choice', author , choice.get);
-router.get('/choice', author , choice.create);
+router.post('/choice', author , choice.create);
 
 
 

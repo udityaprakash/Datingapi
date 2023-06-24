@@ -33,13 +33,10 @@ const result={
 
 
           if (await signup.studentexist(email)){
-            console.log("ueser exixt 1");
+            console.log("user exixt 1");
             const resu = await student.find({email:email});
-            console.log("ueser exixt 2");
             if(resu.length!=0){
-              console.log("ueser exixt 3");
               const updat = await student.findOneAndUpdate({email:email}, {otp:otp , verified:false});
-              console.log("ueser exixt 4");
 
               console.log("updated for reset password : "+updat);
               indatabaseotpstored = true;
@@ -52,11 +49,11 @@ const result={
             }   
           }
           var mailOptions = {
-                from: 'udityap.davegroup@gmail.com',
+                from: 'matchup143143@gmail.com',
                 to: email,
-                subject: 'Reset Password for DAWAY',
+                subject: 'Reset Password for Matchup',
                 html: `<div style="max-width: 90%; margin: auto; padding-top: 20px">
-              <p style="margin-bottom: 30px;">Please enter the OTP to get started</p>
+              <p style="margin-bottom: 30px;">Reset Password OTP is </p>
               <h1 style="font-size: 40px; letter-spacing: 2px; text-align:center;">${otp}</h1></div>`
           };
 
@@ -106,14 +103,14 @@ const result={
               
                 res.json({
                   success:true,
-                  token:resu[0].id,
+                  id:resu[0].id,
                   msg:"user verified successfully",
                   result:fin
                 });
   
               }else{
                 res.json({success:false,
-                msg:"Invalid OTP"});
+                msg:"OTP Incorrect"});
                 
               }
   
@@ -149,7 +146,7 @@ const result={
                   res.json({
                     success:true,
                     token:query[0].id,
-                    msg:"user password reset successfully"
+                    msg:"Succesfully Password Reset"
                   });
   
             }else{
