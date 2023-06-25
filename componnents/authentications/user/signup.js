@@ -24,7 +24,7 @@ post: async (req,res)=>{
     let {fullname , instausername ,password , email, gender, phonenumber}= req.body;
     // console.log(req.body);
     var hashedpassword;
-    if(fullname && instausername && password && email && gender && phonenumber){
+    if(fullname && instausername && password && email && phonenumber){
         const salt= parseInt(process.env.SALT);
         hashedpassword = await bcrypt.hash(password, salt);
         email=email.toLowerCase();  
@@ -42,7 +42,7 @@ post: async (req,res)=>{
                   password:hashedpassword,
                   email:email,
                   pnumber:phonenumber,
-                  gender:gender,
+                  gender:(gender == null) ? null : gender,
                   
                 });
 
