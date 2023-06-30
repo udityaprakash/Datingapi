@@ -15,7 +15,7 @@ db.connection();
 
 //routes
 app.use('/user',require('./routers/userrouter'));
-// app.use('/admin',require('./routers/adminrouter'));
+app.use('/admin',require('./routers/adminrouter'));
 // app.use('/instructor',require('./routers/instructorrouter'));
 
 const port= process.env.PORT || 3000;
