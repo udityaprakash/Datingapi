@@ -6,3 +6,5 @@ router.get('/home',
     msg:"Ready to access admin"});
 }
 );
+
+module.exports = router;
