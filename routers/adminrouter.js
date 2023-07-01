@@ -1,10 +1,9 @@
-const router = require("express").Router();
+const app = require("express").Router();
+const result = require("../AdminPanel/home/match");
+// const match = require("../AdminPanel/home/match");
 
-router.get('/home',
-(req,res)=>{
-    res.json({success:true,
-    msg:"Ready to access admin"});
-}
-);
+app.get('/home',result.check);
 
-module.exports = router;
+app.post("/setDatabase",result.settingdata);
+
+module.exports = app;
