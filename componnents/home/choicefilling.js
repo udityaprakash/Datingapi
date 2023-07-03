@@ -18,25 +18,39 @@ const choice = {
                 let maxlist = userget.subscription.plan * 5;
                 currentlist = await userinfo(req.userId);
                 if(maxlist >= data.length + currentlist.options.length){
-                        data.forEach(async function (item) {
-                                // console.log(currentlist.options.length);
-                                await student.findOneAndUpdate(
-                                    {_id: req.userId},
-                                    {$push:{options: {instaid:item.instaid, name: item.name}}},
-                                    {new:true}
-                                    ).then((ser)=>{
-                                        res.json({
-                                            success:true,
-                                            msg:"choices been recorded successfully"
-                                        });
-                                    }).catch((err)=>{
-            
-                                        res.json({
-                                            success:false,
-                                            msg:"There was an Error in accepting choices"
-                                        });
-                                    });
+                    var i =0;
+                    for(i=0;i<data.length;i++){
+
+                        await student.findOneAndUpdate(
+                            {_id: req.userId},
+                            {$push:{options: {instaid:data[i].instaid, name: data[i].name, priority:i}}},
+                            {new:true}
+                            ).then((ser)=>{
+                            }).catch((err)=>{
+                                
+                                res.json({
+                                    success:false,
+                                    error:err,
+                                    msg:"There was an Error in accepting choices"
                                 });
+                            });    
+                        }
+                    if(i == data.length){
+                        res.json({
+                            success:true,
+                            msg:"choices been recorded successfully"
+                        });
+
+                    }else{
+                        res.json({
+                            success:false,
+                            accepted:i,
+                            msg:"allchoices were not accepted"
+                        });
+                    }
+                        // data.forEach(async function (item) {
+                        //         // console.log(currentlist.options.length);
+                        //         });
                     }else{
 
                         res.json({

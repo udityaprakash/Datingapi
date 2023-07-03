@@ -48,6 +48,9 @@ const schema= new mongoose.Schema({
         },
         name:{
           type:String
+        },
+        priority:{
+          type:Number
         }
       }   
    ],
