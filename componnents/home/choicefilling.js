@@ -25,6 +25,10 @@ const choice = {
                                     {$push:{options: {instaid:item.instaid, name: item.name}}},
                                     {new:true}
                                     ).then((ser)=>{
+                                        res.json({
+                                            success:true,
+                                            msg:"choices been recorded successfully"
+                                        });
                                     }).catch((err)=>{
             
                                         res.json({
