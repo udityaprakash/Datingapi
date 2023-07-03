@@ -1,7 +1,10 @@
 const student= require("../../componnents/databasevariables/studentdb"); 
+function prt(string){
+    console.log(string);
+}
 
 async function  getallverifiedfemaleuser(){
-    return await student.find({verified:true , gender: true}).select(['instauname','fullname']);
+    return await student.find({verified:true , gender: true}).select(['instauname','fullname','options']);
 }
 async function  existverifiedmaleuser(instauname){
     const exist  = await student.findOne({instauname:instauname ,verified:true , gender: false}).select('options');
@@ -13,15 +16,16 @@ async function  existverifiedmaleuser(instauname){
 }
 async function match(){
     const females = await getallverifiedfemaleuser();
+    prt(females);
     females.forEach(async (female)=>{
         let call = await existverifiedmaleuser(female.instauname);
-        // console.log(call);
-        // console.log("...............next............");
+        console.log(call);
+        console.log("...............next............");
         // if( call && call.){
             
         // }
 
-    })
+    });
 }
 
 //this will be replaced with database in future
