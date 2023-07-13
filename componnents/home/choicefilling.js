@@ -35,10 +35,22 @@ const choice = {
                                 });
                             });    
                         }
-                    if(i == data.length){
-                        res.json({
-                            success:true,
-                            msg:"choices been recorded successfully"
+                        if(i == data.length){
+                        await student.findByIdAndUpdate(req.userId,{optionsaddedon: Date.now()}).then((he)=>{
+
+                            res.json({
+                                success:true,
+                                msg:"choices been recorded successfully"
+                            });
+                        }
+
+                        ).catch((err)=>{
+                            res.json({
+                                success:true,
+                                error:err,
+                                msg:"choices been recorded successfully"
+                            });
+
                         });
 
                     }else{

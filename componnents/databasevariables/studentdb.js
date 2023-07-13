@@ -74,11 +74,14 @@ const schema= new mongoose.Schema({
         default:null,
       }
     },
+    optionsaddedon:{
+      type:Date,
+    },
     verified:{
       type:Boolean,
       default:false
     }
-});
+}, {timestamps: true} );
 
 const result = mongoose.model("clgstudent" , schema);
 
