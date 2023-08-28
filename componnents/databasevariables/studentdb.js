@@ -77,6 +77,9 @@ const schema= new mongoose.Schema({
     optionsaddedon:{
       type:Date,
     },
+    profileurl:{
+      type: String
+    },
     verified:{
       type:Boolean,
       default:false

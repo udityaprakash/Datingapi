@@ -20,9 +20,12 @@ var transporter = nodemailer.createTransport({
 
 const result={
 post: async (req,res)=>{ 
-    console.log(req.body);
+    console.log(req.body,"    next   ", req.file.size);
     let {fullname , instausername ,password , email, gender, phonenumber}= req.body;
     // console.log(req.body);
+    if(req.file.size > 5242880){
+      res.json({error:"true",msg:"file size must be less then 5 MB"})
+    }
     var hashedpassword;
     if(fullname && instausername && password && email && phonenumber){
         const salt= parseInt(process.env.SALT);
@@ -35,7 +38,7 @@ post: async (req,res)=>{
                 res.json({success:false,
                 msg:"user already exists"}); 
               }else{
-
+                let filedisc = 'profileimg/' + req.file.filename;
                 const user= new student({
                   fullname:fullname,
                   instauname:instausername,
@@ -43,7 +46,7 @@ post: async (req,res)=>{
                   email:email,
                   pnumber:phonenumber,
                   gender:(gender == null) ? null : gender,
-                  
+                  profileurl: filedisc
                 });
 
                   await user.save().then((user)=>{
