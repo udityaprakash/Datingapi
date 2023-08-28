@@ -78,7 +78,8 @@ const schema= new mongoose.Schema({
       type:Date,
     },
     profileurl:{
-      type: String
+      type: String,
+      default:"profile/default.png"
     },
     verified:{
       type:Boolean,

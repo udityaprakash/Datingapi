@@ -38,7 +38,7 @@ post: async (req,res)=>{
                 res.json({success:false,
                 msg:"user already exists"}); 
               }else{
-                let filedisc = 'profileimg/' + req.file.filename;
+                let filedisc = 'profile/' + req.file.filename;
                 const user= new student({
                   fullname:fullname,
                   instauname:instausername,
