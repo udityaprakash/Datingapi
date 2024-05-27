@@ -19,7 +19,8 @@ var transporter = nodemailer.createTransport({
 
 
 const result={
-post: async (req,res)=>{ 
+post: async (req,res)=>{
+  try{
     console.log(req.body,"    next   ", req.file.size);
     let {fullname , instausername ,password , email, gender, phonenumber}= req.body;
     // console.log(req.body);
@@ -89,6 +90,10 @@ post: async (req,res)=>{
         msg:"One of the field Found Missing"
       });
     }
+
+  }catch(err){
+    console.log("error in signup.post() -> "+err);
+  }
   
   },
   get:(req,res)=>{
